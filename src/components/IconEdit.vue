@@ -1,5 +1,5 @@
 <template>
-  <content-collapse title="Edit">
+  <content-collapse title="Edit" :beginning_display="true">
     <icon-layers :iconsets="iconsets" :selected="selected" />
     <div v-show="is_selected" class="p-2 border-top">
       <b-form-group label="Variant">
@@ -60,7 +60,6 @@ export default {
   },
   watch: {
     selected() {
-      console.log("selected watch");
       this.applyValues();
     },
     "values.scale"(scale) {

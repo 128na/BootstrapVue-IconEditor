@@ -1,5 +1,5 @@
 <template>
-  <content-collapse title="Search Icons" :beginning_display="true">
+  <content-collapse title="Search Icons" :beginning_display="false">
     <div v-for="icon in defined_iconsets" :key="icon" class="icon-list">
       <b-icon :icon="icon" class="icon ml-2" />
       {{icon}}

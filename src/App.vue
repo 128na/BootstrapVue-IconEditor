@@ -7,6 +7,7 @@
       <icon-edit :iconsets="iconsets" :selected="selected" @change="handleChange" />
       <icon-list :iconsets="iconsets" class="flex-1" />
       <icon-output :iconsets="iconsets" />
+      <copyright-content />
     </b-sidebar>
     <b-button
       class="vertical clickable"
@@ -47,9 +48,7 @@ export default {
   },
   methods: {
     handleChange(key_value) {
-      console.log(key_value);
       this.iconsets = this.iconsets.map((iconset, index) => {
-        console.log(index, this.selected.includes(index));
         if (this.selected.includes(index)) {
           iconset.options = Object.assign({}, iconset.options, key_value);
         }
