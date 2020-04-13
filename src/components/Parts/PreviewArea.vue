@@ -24,19 +24,7 @@ export default {
     iconsets: {
       deep: true,
       handler() {
-        this.render_iconsets = this.iconsets.map(iconset => {
-          const options = {
-            variant: iconset.options.variant,
-            "flip-h": iconset.options.flip_h,
-            "flip-v": iconset.options.flip_v,
-            rotate: iconset.options.rotate,
-            scale: iconset.options.scale,
-            "shift-h": iconset.options.shift_h,
-            "shift-v": iconset.options.shift_v,
-            animation: iconset.options.animation
-          };
-          return Object.assign({ icon: iconset.icon }, { options });
-        });
+        this.render_iconsets = this.iconsets;
       }
     }
   },

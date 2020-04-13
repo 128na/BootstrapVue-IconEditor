@@ -6,8 +6,8 @@
         <b-form-select v-model="values.variant" :options="options.variants" />
       </b-form-group>
       <b-form-group label="Flipping">
-        <b-form-checkbox v-model="values.flip_v">Flip Vertical</b-form-checkbox>
-        <b-form-checkbox v-model="values.flip_h">Flip Horizontal</b-form-checkbox>
+        <b-form-checkbox v-model="values.flipV">Flip Vertical</b-form-checkbox>
+        <b-form-checkbox v-model="values.flipH">Flip Horizontal</b-form-checkbox>
       </b-form-group>
       <b-form-group label="Rotate">
         <b-form-input v-model="values.rotate" type="number" step="15"></b-form-input>
@@ -16,10 +16,10 @@
         <b-form-input v-model="values.scale" type="number" step="0.1"></b-form-input>
       </b-form-group>
       <b-form-group label="Shift Vertical ">
-        <b-form-input v-model="values.shift_v" type="number" step="0.1"></b-form-input>
+        <b-form-input v-model="values.shiftV" type="number" step="0.1"></b-form-input>
       </b-form-group>
       <b-form-group label="Shift Horizontal">
-        <b-form-input v-model="values.shift_h" type="number" step="0.1"></b-form-input>
+        <b-form-input v-model="values.shiftH" type="number" step="0.1"></b-form-input>
       </b-form-group>
       <b-form-group label="Animation">
         <b-form-select v-model="values.animation" :options="options.animations" />
@@ -65,20 +65,20 @@ export default {
     "values.scale"(scale) {
       this.$emit("change", { scale });
     },
-    "values.shift_v"(shift_v) {
-      this.$emit("change", { shift_v });
+    "values.shiftV"(shiftV) {
+      this.$emit("change", { shiftV });
     },
-    "values.shift_h"(shift_h) {
-      this.$emit("change", { shift_h });
+    "values.shiftH"(shiftH) {
+      this.$emit("change", { shiftH });
     },
     "values.variant"(variant) {
       this.$emit("change", { variant });
     },
-    "values.flip_v"(flip_v) {
-      this.$emit("change", { flip_v });
+    "values.flipV"(flipV) {
+      this.$emit("change", { flipV });
     },
-    "values.flip_h"(flip_h) {
-      this.$emit("change", { flip_h });
+    "values.flipH"(flipH) {
+      this.$emit("change", { flipH });
     },
     "values.rotate"(rotate) {
       this.$emit("change", { rotate });
@@ -88,20 +88,20 @@ export default {
     }
   },
   created() {
-    this.values = this.init_values;
+    this.values = this.initValues;
   },
   computed: {
     is_selected() {
       return this.selected.length > 0;
     },
-    init_values() {
+    initValues() {
       return {
         scale: 1,
-        shift_v: 0,
-        shift_h: 0,
+        shiftV: 0,
+        shiftH: 0,
         variant: null,
-        flip_v: false,
-        flip_h: false,
+        flipV: false,
+        flipH: false,
         rotate: 0,
         animation: null
       };
@@ -111,7 +111,7 @@ export default {
     applyValues() {
       this.values = this.selected.length
         ? Object.assign({}, this.iconsets[this.selected[0]].options)
-        : this.init_values;
+        : this.initValues;
     }
   }
 };

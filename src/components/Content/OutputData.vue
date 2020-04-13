@@ -24,12 +24,12 @@ export default {
         const opt = icon.options || {};
         const props = [
           opt.variant ? ` variant="${opt.variant}"` : "",
-          opt.flip_h ? ` flip-h` : "",
-          opt.flip_v ? ` flip-v` : "",
+          opt.flipH ? ` flip-h` : "",
+          opt.flipV ? ` flip-v` : "",
           opt.rotate ? ` rotate="${opt.rotate}"` : "",
           !opt.scale || opt.scale === 1 ? "" : ` scale="${opt.scale}"`,
-          opt.shift_h ? ` shift-h="${opt.shift_h}"` : "",
-          opt.shift_v ? ` shift-v="${opt.shift_v}"` : "",
+          opt.shiftH ? ` shift-h="${opt.shiftH}"` : "",
+          opt.shiftV ? ` shift-v="${opt.shiftV}"` : "",
           opt.animation ? ` animation="${opt.animation}"` : ""
         ];
 

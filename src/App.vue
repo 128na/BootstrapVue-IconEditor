@@ -7,13 +7,16 @@
       <icon-edit :iconsets="iconsets" :selected="selected" @change="handleChange" />
       <add-icon :iconsets="iconsets" class="flex-1" />
       <output-data :iconsets="iconsets" />
+      <import-export-data :iconsets="iconsets" />
       <copyright-content />
     </b-sidebar>
     <b-button
       class="vertical clickable"
       variant="outline-secondary"
       @click="show_sidebar = !show_sidebar"
-    >Show Menu</b-button>
+    >
+      <span>Show Menu</span>
+    </b-button>
   </div>
 </template>
 <script>
@@ -25,14 +28,34 @@ const demo_iconsets = [
   {
     icon: "pencil",
     options: {
-      scale: 0.5,
-      shift_v: 5,
-      shift_h: 3,
-      variant: "danger",
-      flip_v: true,
-      flip_h: true,
-      rotate: 45,
+      scale: "0.5",
+      shiftV: "4.4",
+      shiftH: "4.4",
+      variant: "primary",
+      flipV: false,
+      flipH: false,
+      rotate: "0",
       animation: null
+    }
+  },
+  {
+    icon: "check",
+    options: {
+      scale: "0.3",
+      shiftV: "4.7",
+      shiftH: "-2.8",
+      variant: "success",
+      flipV: null,
+      flipH: null
+    }
+  },
+  {
+    icon: "check",
+    options: {
+      variant: "success",
+      scale: "0.3",
+      shiftV: "2.7",
+      shiftH: "-2.8"
     }
   }
 ];
@@ -70,13 +93,16 @@ export default {
   cursor: pointer;
   user-select: none;
 }
-.vertical {
+.btn.vertical {
   position: absolute;
-  right: -2.3rem;
+  right: 0;
   top: 6rem;
   border-top-right-radius: 0;
-  border-top-left-radius: 0;
-  border-top: none;
-  transform: rotate(90deg);
+  border-bottom-right-radius: 0;
+  border-right: none;
+  span {
+    writing-mode: vertical-lr;
+    vertical-align: middle;
+  }
 }
 </style>

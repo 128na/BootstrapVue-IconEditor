@@ -3,8 +3,10 @@
     <transition-group>
       <div
         v-for="(iconset,index) in iconsets"
-        :key="iconset.icon"
-        @click="handleSelect(index)"
+        :key="`${iconset.icon}-${index}`"
+        @click.ctrl.exact="handleCtrlSelect(index)"
+        @click.shift.exact="handleShiftSelect(index)"
+        @click.exact="handleSelect(index)"
         :class="{selected:isSelected(index)}"
         class="clickable px-2 py-1 d-flex align-items-center items"
       >
@@ -18,8 +20,10 @@
   </draggable>
 </template>
 <script>
+import multi_selectable from "../../mixins/MultSelectable";
 export default {
   props: ["iconsets", "selected"],
+  mixins: [multi_selectable],
   created() {
     this.visible = true;
   },
@@ -34,25 +38,11 @@ export default {
     }
   },
   methods: {
-    select(iconsets_index) {
-      this.selected.push(iconsets_index);
-    },
-    unselect(selected_index) {
-      this.selected.splice(selected_index, 1);
-    },
-    handleSelect(iconsets_index) {
-      const selected_index = this.selected.indexOf(iconsets_index);
-      if (selected_index !== -1) {
-        this.unselect(selected_index);
-      } else {
-        this.select(iconsets_index);
-      }
-    },
     async handleDelete(iconsets_index) {
       if (window.confirm("Remove?")) {
         const selected_index = this.selected.indexOf(iconsets_index);
         if (selected_index !== -1) {
-          this.unselect(selected_index);
+          this.selected.splice(selected_index, 1);
           await this.$nextTick();
         }
         this.iconsets.splice(iconsets_index, 1);
