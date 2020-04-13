@@ -3,10 +3,11 @@
     <b-form-group class="p-2 m-0 border-bottom">
       <b-form-checkbox v-model="with_template">With Template Element</b-form-checkbox>
     </b-form-group>
-    <div class="position-relative bg-white">
-      <b-button @click="$copyText(export_data)" size="sm" class="position-absolute btn-copy">Copy</b-button>
+    <div class="position-relative bg-white output" id="output" @click="handleOutput">
+      <small class="position-absolute btn-copy text-secondary">Click to copy to clipboard</small>
       <pre class="px-2 py-3 m-0">{{ export_data }}</pre>
     </div>
+    <b-tooltip target="output" triggers variant="success" ref="tooltip">Copied!</b-tooltip>
   </content-collapse>
 </template>
 <script>
@@ -20,15 +21,16 @@ export default {
   computed: {
     icon_htmls() {
       return this.iconsets.map(icon => {
+        const opt = icon.options || {};
         const props = [
-          icon.variant ? ` variant="${icon.variant}"` : "",
-          icon.flip_h ? ` flip-h` : "",
-          icon.flip_v ? ` flip-v` : "",
-          icon.rotate ? ` rotate="${icon.rotate}"` : "",
-          !icon.scale || icon.scale === 1 ? "" : ` scale="${icon.scale}"`,
-          icon.shift_h ? ` shift-h="${icon.shift_h}"` : "",
-          icon.shift_v ? ` shift-v="${icon.shift_v}"` : "",
-          icon.animation ? ` animation="${icon.animation}"` : ""
+          opt.variant ? ` variant="${opt.variant}"` : "",
+          opt.flip_h ? ` flip-h` : "",
+          opt.flip_v ? ` flip-v` : "",
+          opt.rotate ? ` rotate="${opt.rotate}"` : "",
+          !opt.scale || opt.scale === 1 ? "" : ` scale="${opt.scale}"`,
+          opt.shift_h ? ` shift-h="${opt.shift_h}"` : "",
+          opt.shift_v ? ` shift-v="${opt.shift_v}"` : "",
+          opt.animation ? ` animation="${opt.animation}"` : ""
         ];
 
         return `  <b-icon icon="${icon.icon}"${props.join("")} />`;
@@ -51,12 +53,29 @@ ${this.icon_htmls.join("\n")}
     export_data() {
       return this.with_template ? this.iconstack_with_template : this.iconstack;
     }
+  },
+  methods: {
+    handleOutput() {
+      this.$copyText(this.export_data);
+      this.$refs.tooltip.$emit("open");
+      setTimeout(() => {
+        this.$refs.tooltip.$emit("close");
+      }, 1000);
+    }
   }
 };
 </script>
-<style scoped>
-.btn-copy {
-  top: 0.5rem;
-  right: 0.5rem;
+<style lang="scss" scoped>
+.output {
+  .btn-copy {
+    top: 0.5rem;
+    right: 0.5rem;
+    display: none;
+  }
+  &:hover {
+    .btn-copy {
+      display: block;
+    }
+  }
 }
 </style>

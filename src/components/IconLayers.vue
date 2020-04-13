@@ -1,5 +1,5 @@
 <template>
-  <content-collapse title="Icons" :beginning_display="true">
+  <div>
     <div
       v-for="(icon,index) in iconsets"
       :key="index"
@@ -10,7 +10,7 @@
       <b-icon :icon="icon.icon" />
       {{ icon.icon }}
     </div>
-  </content-collapse>
+  </div>
 </template>
 <script>
 export default {

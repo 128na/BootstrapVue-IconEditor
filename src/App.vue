@@ -2,13 +2,17 @@
   <div>
     <header-menu />
     <icon-preview :iconsets="iconsets" :config="config" />
-    <b-sidebar id="sidebar-1" title shadow right :visible="true">
+    <b-sidebar id="sidebar-1" title="Menu" shadow right v-model="show_sidebar">
       <preview-config :config="config" />
-      <icon-layers :iconsets="iconsets" :selected="selected" />
       <icon-edit :iconsets="iconsets" :selected="selected" @change="handleChange" />
       <icon-list :iconsets="iconsets" class="flex-1" />
       <icon-output :iconsets="iconsets" />
     </b-sidebar>
+    <b-button
+      class="vertical clickable"
+      variant="outline-secondary"
+      @click="show_sidebar = !show_sidebar"
+    >Show Menu</b-button>
   </div>
 </template>
 <script>
@@ -18,48 +22,58 @@ export default {
       iconsets: [
         {
           icon: "file-text",
-          scale: 0.75,
-          shift_v: 0,
-          shift_h: 0,
-          variant: null,
-          flip_v: false,
-          flip_h: false,
-          rotate: null,
-          animation: null
+          options: {}
         },
         {
           icon: "pencil",
-          scale: 0.5,
-          shift_v: 5,
-          shift_h: 3,
-          variant: "danger",
-          flip_v: true,
-          flip_h: true,
-          rotate: 45,
-          animation: null
+          options: {
+            scale: 0.5,
+            shift_v: 5,
+            shift_h: 3,
+            variant: "danger",
+            flip_v: true,
+            flip_h: true,
+            rotate: 45,
+            animation: null
+          }
         }
       ],
       selected: [],
       config: {
         scale: 16
-      }
+      },
+      show_sidebar: true
     };
   },
   methods: {
-    handleChange(values) {}
+    handleChange(key_value) {
+      console.log(key_value);
+      this.iconsets = this.iconsets.map((iconset, index) => {
+        console.log(index, this.selected.includes(index));
+        if (this.selected.includes(index)) {
+          iconset.options = Object.assign({}, iconset.options, key_value);
+        }
+        return iconset;
+      });
+    }
   }
 };
 </script>
-<style>
-body,
-html {
-  height: 100vh;
-}
+<style lang="scss">
 .flex-1 {
   flex: 1;
 }
 .clickable {
   cursor: pointer;
   user-select: none;
+}
+.vertical {
+  position: absolute;
+  right: -2.3rem;
+  top: 6rem;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top: none;
+  transform: rotate(90deg);
 }
 </style>

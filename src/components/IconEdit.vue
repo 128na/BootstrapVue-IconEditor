@@ -1,6 +1,7 @@
 <template>
   <content-collapse title="Edit">
-    <div v-show="is_selected" class="p-2">
+    <icon-layers :iconsets="iconsets" :selected="selected" />
+    <div v-show="is_selected" class="p-2 border-top">
       <b-form-group label="Variant">
         <b-form-select v-model="values.variant" :options="options.variants" />
       </b-form-group>
@@ -24,7 +25,7 @@
         <b-form-select v-model="values.animation" :options="options.animations" />
       </b-form-group>
     </div>
-    <div v-show="!is_selected" class="p-2">No icon selected.</div>
+    <div v-show="!is_selected" class="p-2 border-top">No icon selected.</div>
   </content-collapse>
 </template>
 <script>
@@ -32,16 +33,7 @@ export default {
   props: ["iconsets", "selected"],
   data() {
     return {
-      values: {
-        scale: 1,
-        shift_v: 0,
-        shift_h: 0,
-        variant: null,
-        flip_v: false,
-        flip_h: false,
-        rotate: 0,
-        animation: null
-      },
+      values: {},
       options: {
         variants: [
           { value: null, text: "" },
@@ -66,9 +58,61 @@ export default {
       }
     };
   },
+  watch: {
+    selected() {
+      console.log("selected watch");
+      this.applyValues();
+    },
+    "values.scale"(scale) {
+      this.$emit("change", { scale });
+    },
+    "values.shift_v"(shift_v) {
+      this.$emit("change", { shift_v });
+    },
+    "values.shift_h"(shift_h) {
+      this.$emit("change", { shift_h });
+    },
+    "values.variant"(variant) {
+      this.$emit("change", { variant });
+    },
+    "values.flip_v"(flip_v) {
+      this.$emit("change", { flip_v });
+    },
+    "values.flip_h"(flip_h) {
+      this.$emit("change", { flip_h });
+    },
+    "values.rotate"(rotate) {
+      this.$emit("change", { rotate });
+    },
+    "values.animation"(animation) {
+      this.$emit("change", { animation });
+    }
+  },
+  created() {
+    this.values = this.init_values;
+  },
   computed: {
     is_selected() {
       return this.selected.length > 0;
+    },
+    init_values() {
+      return {
+        scale: 1,
+        shift_v: 0,
+        shift_h: 0,
+        variant: null,
+        flip_v: false,
+        flip_h: false,
+        rotate: 0,
+        animation: null
+      };
+    }
+  },
+  methods: {
+    applyValues() {
+      this.values = this.selected.length
+        ? Object.assign({}, this.iconsets[this.selected[0]].options)
+        : this.init_values;
     }
   }
 };

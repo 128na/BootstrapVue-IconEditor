@@ -37,14 +37,7 @@ export default {
     handleAdd(icon) {
       const icon_data = {
         icon,
-        scale: 1,
-        shift_v: 0,
-        shift_h: 0,
-        variant: null,
-        flip_v: false,
-        flip_h: false,
-        rotate: null,
-        animation: null
+        options: {}
       };
       this.iconsets.push(icon_data);
     }
