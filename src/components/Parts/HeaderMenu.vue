@@ -1,7 +1,13 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="primary">
     <b-container>
-      <b-navbar-brand href="#">BootstrapVue IconEditor</b-navbar-brand>
+      <b-navbar-brand :href="url">
+        <b-iconstack class="mr-1">
+          <b-icon icon="file-text" variant="light" />
+          <b-icon icon="pencil" variant="light" rotate="0" scale="0.7" shift-h="4.4" shift-v="4.4" />
+        </b-iconstack>
+        {{title}}
+      </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -15,3 +21,11 @@
     </b-container>
   </b-navbar>
 </template>
+<script>
+export default {
+  computed: {
+    title: () => process.env.VUE_APP_NAME,
+    url: () => process.env.VUE_APP_URL
+  }
+};
+</script>

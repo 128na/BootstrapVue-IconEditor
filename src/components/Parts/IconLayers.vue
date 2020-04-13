@@ -8,11 +8,11 @@
         @click.shift.exact="handleShiftSelect(index)"
         @click.exact="handleSelect(index)"
         :class="{selected:isSelected(index)}"
-        class="clickable px-2 py-1 d-flex align-items-center items"
+        class="draggable px-2 py-1 d-flex align-items-center items"
       >
         <b-icon :icon="iconset.icon" class="mr-1" />
         <div class="flex-1">{{ iconset.icon }}</div>
-        <div class="btn-delete" @click.stop="handleDelete(index)">
+        <div class="btn-delete clickable" @click.stop="handleDelete(index)">
           <b-icon icon="x-circle" :variant="isSelected(index) ? 'light':'danger'" />
         </div>
       </div>

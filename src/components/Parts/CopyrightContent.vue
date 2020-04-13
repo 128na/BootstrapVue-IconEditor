@@ -2,12 +2,20 @@
   <div class="p-2">
     <small>
       Created by
-      <a href="https://twitter.com/128Na" target="_blank" rel="noopener noreferer">@128Na</a>,
-      <a
-        href="https://github.com/128na/BootstrapVue-IconEditor"
-        target="_blank"
-        rel="noopener noreferer"
-      >Github</a>
+      <a :href="twitter" target="_blank" rel="noopener noreferer">@{{author}}</a>,
+      <a :href="github" target="_blank" rel="noopener noreferer">Github</a>
+      <br />
+      version {{version}}
     </small>
   </div>
 </template>
+<script>
+export default {
+  computed: {
+    author: () => process.env.VUE_APP_AUTHOR,
+    twitter: () => process.env.VUE_APP_TWITTER,
+    github: () => process.env.VUE_APP_GITHUB,
+    version: () => process.env.VUE_APP_VERSION
+  }
+};
+</script>

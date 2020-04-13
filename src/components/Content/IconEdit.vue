@@ -13,7 +13,7 @@
         <b-form-input v-model="values.rotate" type="number" step="15"></b-form-input>
       </b-form-group>
       <b-form-group label="Scale">
-        <b-form-input v-model="values.scale" type="number" step="0.1"></b-form-input>
+        <b-form-input v-model="values.scale" type="number" min="0.1" step="0.1"></b-form-input>
       </b-form-group>
       <b-form-group label="Shift Vertical ">
         <b-form-input v-model="values.shiftV" type="number" step="0.1"></b-form-input>

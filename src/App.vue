@@ -23,39 +23,28 @@
 const demo_iconsets = [
   {
     icon: "file-text",
-    options: {}
+    options: {
+      scale: "1",
+      shiftV: "0",
+      shiftH: "0",
+      variant: "",
+      flipV: false,
+      flipH: false,
+      rotate: "0",
+      animation: ""
+    }
   },
   {
     icon: "pencil",
     options: {
-      scale: "0.5",
+      scale: "0.7",
       shiftV: "4.4",
       shiftH: "4.4",
       variant: "primary",
       flipV: false,
       flipH: false,
       rotate: "0",
-      animation: null
-    }
-  },
-  {
-    icon: "check",
-    options: {
-      scale: "0.3",
-      shiftV: "4.7",
-      shiftH: "-2.8",
-      variant: "success",
-      flipV: null,
-      flipH: null
-    }
-  },
-  {
-    icon: "check",
-    options: {
-      variant: "success",
-      scale: "0.3",
-      shiftV: "2.7",
-      shiftH: "-2.8"
+      animation: ""
     }
   }
 ];
@@ -91,6 +80,10 @@ export default {
 }
 .clickable {
   cursor: pointer;
+  user-select: none;
+}
+.draggable {
+  cursor: grab;
   user-select: none;
 }
 .btn.vertical {

@@ -21,6 +21,7 @@
 import * as icons from "bootstrap-vue/src/icons/icons";
 const exclude_icons = [
   "BIconBlank",
+  "BIconTrash2Fill",
   "BIconXCircle",
   "BIconXCircleFill",
   "BIconXDiamond",
@@ -42,8 +43,11 @@ export default {
     this.importIcons();
   },
   computed: {
+    _search() {
+      return this.search.trim().toLowerCase();
+    },
     filtered_icons() {
-      return this.defined_icons.filter(icon => icon.includes(this.search));
+      return this.defined_icons.filter(icon => icon.includes(this._search));
     }
   },
   methods: {
@@ -61,7 +65,16 @@ export default {
     handleAdd(icon) {
       const icon_data = {
         icon,
-        options: {}
+        options: {
+          scale: "1",
+          shiftV: "0",
+          shiftH: "0",
+          variant: "",
+          flipV: false,
+          flipH: false,
+          rotate: "0",
+          animation: ""
+        }
       };
       this.iconsets.push(icon_data);
     }
