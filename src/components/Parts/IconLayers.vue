@@ -34,21 +34,32 @@ export default {
     }
   },
   methods: {
-    handleSelect(index) {
-      const i = this.selected.indexOf(index);
-      if (i === -1) {
-        this.selected.push(index);
+    select(iconsets_index) {
+      this.selected.push(iconsets_index);
+    },
+    unselect(selected_index) {
+      this.selected.splice(selected_index, 1);
+    },
+    handleSelect(iconsets_index) {
+      const selected_index = this.selected.indexOf(iconsets_index);
+      if (selected_index !== -1) {
+        this.unselect(selected_index);
       } else {
-        this.selected.splice(i, 1);
+        this.select(iconsets_index);
       }
     },
-    handleDelete(index) {
+    async handleDelete(iconsets_index) {
       if (window.confirm("Remove?")) {
-        this.iconsets.splice(index, 1);
+        const selected_index = this.selected.indexOf(iconsets_index);
+        if (selected_index !== -1) {
+          this.unselect(selected_index);
+          await this.$nextTick();
+        }
+        this.iconsets.splice(iconsets_index, 1);
       }
     },
-    isSelected(index) {
-      return this.selected.includes(index);
+    isSelected(iconsets_index) {
+      return this.selected.includes(iconsets_index);
     }
   }
 };
@@ -56,7 +67,7 @@ export default {
 <style lang="scss" scoped>
 .items {
   &.selected {
-    background-color: var(--secondary);
+    background-color: var(--primary);
     color: var(--light);
   }
 

@@ -25,7 +25,7 @@
         <b-form-select v-model="values.animation" :options="options.animations" />
       </b-form-group>
     </div>
-    <div v-show="!is_selected" class="p-2 border-top">No icon selected.</div>
+    <div v-show="!is_selected" class="p-2 border-top">Please select icons to edit.</div>
   </content-collapse>
 </template>
 <script>

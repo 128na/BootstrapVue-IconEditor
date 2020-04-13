@@ -1,12 +1,12 @@
 <template>
   <div>
     <header-menu />
-    <icon-preview :iconsets="iconsets" :config="config" />
+    <preview-area :iconsets="iconsets" :config="config" />
     <b-sidebar id="sidebar-1" title="Menu" shadow right v-model="show_sidebar">
       <preview-config :config="config" />
       <icon-edit :iconsets="iconsets" :selected="selected" @change="handleChange" />
-      <icon-list :iconsets="iconsets" class="flex-1" />
-      <icon-output :iconsets="iconsets" />
+      <add-icon :iconsets="iconsets" class="flex-1" />
+      <output-data :iconsets="iconsets" />
       <copyright-content />
     </b-sidebar>
     <b-button
@@ -17,34 +17,38 @@
   </div>
 </template>
 <script>
+const demo_iconsets = [
+  {
+    icon: "file-text",
+    options: {}
+  },
+  {
+    icon: "pencil",
+    options: {
+      scale: 0.5,
+      shift_v: 5,
+      shift_h: 3,
+      variant: "danger",
+      flip_v: true,
+      flip_h: true,
+      rotate: 45,
+      animation: null
+    }
+  }
+];
 export default {
   data() {
     return {
-      iconsets: [
-        {
-          icon: "file-text",
-          options: {}
-        },
-        {
-          icon: "pencil",
-          options: {
-            scale: 0.5,
-            shift_v: 5,
-            shift_h: 3,
-            variant: "danger",
-            flip_v: true,
-            flip_h: true,
-            rotate: 45,
-            animation: null
-          }
-        }
-      ],
+      iconsets: [],
       selected: [],
       config: {
         scale: 16
       },
       show_sidebar: true
     };
+  },
+  created() {
+    this.iconsets = demo_iconsets;
   },
   methods: {
     handleChange(key_value) {
