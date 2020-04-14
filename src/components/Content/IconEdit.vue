@@ -6,22 +6,55 @@
         <b-form-select v-model="values.variant" :options="options.variants" />
       </b-form-group>
       <b-form-group label="Flipping">
-        <b-form-checkbox v-model="values.flipV">Flip Vertical</b-form-checkbox>
-        <b-form-checkbox v-model="values.flipH">Flip Horizontal</b-form-checkbox>
+        <b-form-checkbox v-model="values.flipV">
+          <b-icon variant="primary" class="mr-1" icon="vr" />Flip Vertical
+        </b-form-checkbox>
+        <b-form-checkbox v-model="values.flipH">
+          <b-icon variant="primary" class="mr-1" icon="hr" />Flip Horizontal
+        </b-form-checkbox>
       </b-form-group>
-      <b-form-group label="Rotate">
+      <b-form-group>
+        <template slot="label">
+          <b-icon variant="primary" icon="arrow-clockwise" class="mr-1" />Rotate
+        </template>
         <b-form-input v-model="values.rotate" type="number" step="15"></b-form-input>
       </b-form-group>
-      <b-form-group label="Scale">
+      <b-form-group>
+        <template slot="label">
+          <b-iconstack variant="primary" class="mr-1">
+            <b-icon icon="square" />
+            <b-icon icon="square" scale="0.5" />
+          </b-iconstack>Scale
+        </template>
         <b-form-input v-model="values.scale" type="number" min="0.1" step="0.1"></b-form-input>
       </b-form-group>
-      <b-form-group label="Shift Vertical ">
+      <b-form-group>
+        <template slot="label">
+          <b-iconstack variant="primary" class="mr-1">
+            <b-icon icon="arrow-down" />
+            <b-icon icon="arrow-up" />
+          </b-iconstack>Shift Vertical
+        </template>
+
         <b-form-input v-model="values.shiftV" type="number" step="0.1"></b-form-input>
       </b-form-group>
-      <b-form-group label="Shift Horizontal">
+      <b-form-group>
+        <template slot="label">
+          <b-iconstack variant="primary" class="mr-1">
+            <b-icon icon="arrow-left" />
+            <b-icon icon="arrow-right" />
+          </b-iconstack>Shift Horizontal
+        </template>
+
         <b-form-input v-model="values.shiftH" type="number" step="0.1"></b-form-input>
       </b-form-group>
-      <b-form-group label="Animation">
+      <b-form-group>
+        <template slot="label">
+          <b-iconstack variant="primary" class="mr-1">
+            <b-icon icon="clock" animation="spin" />
+          </b-iconstack>Animation
+        </template>
+
         <b-form-select v-model="values.animation" :options="options.animations" />
       </b-form-group>
     </div>

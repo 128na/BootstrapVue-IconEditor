@@ -22,6 +22,11 @@ import * as icons from "bootstrap-vue/src/icons/icons";
 const exclude_icons = [
   "BIconBlank",
   "BIconTrash2Fill",
+  "BIconGrid1x2Fill",
+  "BIconGrid3x2GapFill",
+  "BIconGrid3x3GapFill",
+  "BIconGrid3x2Gap",
+  "BIconGrid3x3Gap",
   "BIconXCircle",
   "BIconXCircleFill",
   "BIconXDiamond",

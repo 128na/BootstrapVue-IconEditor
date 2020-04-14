@@ -10,7 +10,7 @@
         :class="{selected:isSelected(index)}"
         class="draggable px-2 py-1 d-flex align-items-center items"
       >
-        <b-icon :icon="iconset.icon" class="mr-1" />
+        <b-icon :icon="iconset.icon" v-bind="iconset.options" class="icon mr-1" />
         <div class="flex-1">{{ iconset.icon }}</div>
         <div class="btn-delete clickable" @click.stop="handleDelete(index)">
           <b-icon icon="x-circle" :variant="isSelected(index) ? 'light':'danger'" />

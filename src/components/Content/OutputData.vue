@@ -19,6 +19,9 @@ export default {
     };
   },
   computed: {
+    is_single() {
+      return this.iconsets.length < 2;
+    },
     icon_htmls() {
       return this.iconsets.map(icon => {
         const opt = icon.options || {};
@@ -26,35 +29,37 @@ export default {
           opt.variant ? ` variant="${opt.variant}"` : "",
           opt.flipH ? ` flip-h` : "",
           opt.flipV ? ` flip-v` : "",
-          opt.rotate ? ` rotate="${opt.rotate}"` : "",
-          !opt.scale || opt.scale === 1 ? "" : ` scale="${opt.scale}"`,
-          opt.shiftH ? ` shift-h="${opt.shiftH}"` : "",
-          opt.shiftV ? ` shift-v="${opt.shiftV}"` : "",
+          opt.rotate != 0 ? ` rotate="${opt.rotate}"` : "",
+          !opt.scale || opt.scale == 1 ? "" : ` scale="${opt.scale}"`,
+          opt.shiftH != 0 ? ` shift-h="${opt.shiftH}"` : "",
+          opt.shiftV != 0 ? ` shift-v="${opt.shiftV}"` : "",
           opt.animation ? ` animation="${opt.animation}"` : ""
         ];
 
-        return `  <b-icon icon="${icon.icon}"${props.join("")} />`;
+        return `<b-icon icon="${icon.icon}"${props.join("")} />`;
       });
     },
-    iconstack() {
-      return `<b-iconstack>
-${this.icon_htmls.join("\n")}
-</b-iconstack>
-`;
-    },
-    iconstack_with_template() {
-      return `<template>
-  <b-iconstack>
-  ${this.icon_htmls.join("\n  ")}
-  </b-iconstack>
-</template>
-`;
+    iconstack_htmls() {
+      let html = ["<b-iconstack>"];
+      html = html.concat(this.icon_htmls.map(h => `  ${h}`));
+      html.push("</b-iconstack>");
+      return html;
     },
     export_data() {
-      return this.with_template ? this.iconstack_with_template : this.iconstack;
+      const htmls = this.is_single ? this.icon_htmls : this.iconstack_htmls;
+
+      return this.with_template
+        ? this.addTemplate(htmls).join("\n")
+        : htmls.join("\n");
     }
   },
   methods: {
+    addTemplate(htmls) {
+      let html = ["<template>"];
+      html = html.concat(htmls.map(h => `  ${h}`));
+      html.push("</template>");
+      return html;
+    },
     handleOutput() {
       this.$copyText(this.export_data);
       this.$refs.tooltip.$emit("open");
