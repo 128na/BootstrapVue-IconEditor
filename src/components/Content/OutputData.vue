@@ -40,10 +40,11 @@ export default {
       });
     },
     iconstack_htmls() {
-      let html = ["<b-iconstack>"];
-      html = html.concat(this.icon_htmls.map(h => `  ${h}`));
-      html.push("</b-iconstack>");
-      return html;
+      return [
+        "<b-iconstack>",
+        ...this.icon_htmls.map(h => `  ${h}`),
+        "</b-iconstack>"
+      ];
     },
     export_data() {
       const htmls = this.is_single ? this.icon_htmls : this.iconstack_htmls;
@@ -55,10 +56,7 @@ export default {
   },
   methods: {
     addTemplate(htmls) {
-      let html = ["<template>"];
-      html = html.concat(htmls.map(h => `  ${h}`));
-      html.push("</template>");
-      return html;
+      return ["<template>", ...htmls.map(h => `  ${h}`), "</template>"];
     },
     handleOutput() {
       this.$copyText(this.export_data);
